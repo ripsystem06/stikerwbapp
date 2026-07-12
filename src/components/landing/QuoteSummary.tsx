@@ -2,11 +2,20 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { m, AnimatePresence } from "framer-motion";
-import { ShoppingCart, ChevronUp } from "lucide-react";
+import { ShoppingCart, ChevronUp, X } from "lucide-react";
 import { useQuoteContext } from "@/hooks/useQuoteConfigurator";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 // ── Animation variants ────────────────────────────────────
+const panelVariants = {
+  hidden: { x: "100%" },
+  visible: {
+    x: 0,
+    transition: { type: "spring" as const, stiffness: 300, damping: 30 },
+  },
+  exit: { x: "100%", transition: { duration: 0.2 } },
+};
+
 const drawerVariants = {
   collapsed: { y: "calc(100% - 3.5rem)" },
   expanded: { y: 0 },
@@ -143,29 +152,53 @@ function QuoteSummaryContent({ onContinue, onSend }: QuoteSummaryContentProps) {
 
 // ── Desktop Panel ─────────────────────────────────────────
 function DesktopPanel({
+  isOpen,
+  onClose,
   onContinue,
   onSend,
 }: {
+  isOpen: boolean;
+  onClose: () => void;
   onContinue: () => void;
   onSend: () => void;
 }) {
   return (
-    <aside
-      className="fixed right-0 top-20 hidden h-[calc(100vh-5rem)] w-[360px] flex-col border-l border-surface-alt bg-surface md:flex"
-      aria-label="Resumen de cotización"
-    >
-      {/* Header */}
-      <div className="shrink-0 border-b border-surface-alt px-4 py-4">
-        <div className="flex items-center gap-2">
-          <ShoppingCart className="h-5 w-5 text-primary" aria-hidden="true" />
-          <h3 className="text-base font-bold uppercase tracking-wide text-text-primary">
-            TU COTIZACIÓN
-          </h3>
-        </div>
-      </div>
+    <AnimatePresence>
+      {isOpen && (
+        <m.aside
+          key="desktop-panel"
+          variants={panelVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          className="fixed right-0 top-20 hidden h-[calc(100vh-5rem)] w-[360px] flex-col border-l border-surface-alt bg-surface md:flex"
+          aria-label="Resumen de cotización"
+        >
+          {/* Header */}
+          <div className="shrink-0 border-b border-surface-alt px-4 py-4">
+            <div className="flex items-center gap-2">
+              <ShoppingCart
+                className="h-5 w-5 text-primary"
+                aria-hidden="true"
+              />
+              <h3 className="flex-1 text-base font-bold uppercase tracking-wide text-text-primary">
+                TU COTIZACIÓN
+              </h3>
+              <button
+                type="button"
+                onClick={onClose}
+                className="rounded-lg p-1.5 text-text-secondary transition-colors hover:bg-surface-alt hover:text-text-primary"
+                aria-label="Cerrar panel de cotización"
+              >
+                <X className="h-4 w-4" aria-hidden="true" />
+              </button>
+            </div>
+          </div>
 
-      <QuoteSummaryContent onContinue={onContinue} onSend={onSend} />
-    </aside>
+          <QuoteSummaryContent onContinue={onContinue} onSend={onSend} />
+        </m.aside>
+      )}
+    </AnimatePresence>
   );
 }
 
@@ -179,6 +212,9 @@ function MobileDrawer({
 }) {
   const { selectedCount } = useQuoteContext();
   const [isOpen, setIsOpen] = useState(false);
+
+  // Hide drawer entirely when no products selected
+  if (selectedCount === 0) return null;
 
   // Close on Escape
   useEffect(() => {
@@ -266,7 +302,9 @@ function MobileDrawer({
 
 // ── Main component ────────────────────────────────────────
 export default function QuoteSummary() {
+  const { selectedCount } = useQuoteContext();
   const isDesktop = useMediaQuery("(min-width: 768px)");
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleContinue = useCallback(() => {
     const formEl = document.getElementById("cotizar");
@@ -283,9 +321,40 @@ export default function QuoteSummary() {
     }
   }, []);
 
-  if (isDesktop) {
-    return <DesktopPanel onContinue={handleContinue} onSend={handleSend} />;
-  }
+  const handleClose = useCallback(() => setIsOpen(false), []);
+  const handleToggle = useCallback(() => setIsOpen((prev) => !prev), []);
 
-  return <MobileDrawer onContinue={handleContinue} onSend={handleSend} />;
+  return (
+    <>
+      {/* Floating cart button — desktop only, visible when products selected */}
+      {isDesktop && selectedCount > 0 && !isOpen && (
+        <m.button
+          key="floating-cart"
+          type="button"
+          onClick={handleToggle}
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0, opacity: 0 }}
+          className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/30 transition-transform hover:scale-110 active:scale-95"
+          aria-label={`Ver cotización (${selectedCount} producto${selectedCount > 1 ? "s" : ""})`}
+        >
+          <ShoppingCart className="h-6 w-6" aria-hidden="true" />
+          <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-orange-600 text-[10px] font-bold text-white ring-2 ring-surface">
+            {selectedCount}
+          </span>
+        </m.button>
+      )}
+
+      {isDesktop ? (
+        <DesktopPanel
+          isOpen={isOpen}
+          onClose={handleClose}
+          onContinue={handleContinue}
+          onSend={handleSend}
+        />
+      ) : (
+        <MobileDrawer onContinue={handleContinue} onSend={handleSend} />
+      )}
+    </>
+  );
 }
