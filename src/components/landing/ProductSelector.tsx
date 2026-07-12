@@ -2,7 +2,6 @@
 
 import { useQuoteContext } from "@/hooks/useQuoteConfigurator";
 import products from "@/lib/products";
-import CategoryFilter from "./CategoryFilter";
 import ProductCard from "./ProductCard";
 
 export default function ProductSelector() {
@@ -19,9 +18,7 @@ export default function ProductSelector() {
   const totalCount = products.length;
 
   return (
-    <div className="mt-12">
-      <CategoryFilter />
-
+    <div>
       <p
         className="mt-6 text-sm text-text-secondary"
         aria-live="polite"
