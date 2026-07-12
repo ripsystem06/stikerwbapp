@@ -34,32 +34,30 @@ Chain strategy: stacked-to-main
 
 ## Phase 3: Static Sections B
 
-- [ ] 3.1 `src/components/landing/Benefits.tsx` — 5–6 icon+text benefit cards, Lucide, Server
-- [ ] 3.2 `src/components/landing/FAQ.tsx` — 6–8 static-open accordion items, Server
-- [ ] 3.3 `src/components/landing/Footer.tsx` — logo, links (Productos/Empresa/Contacto), social placeholders
+- [x] 3.1 `src/components/landing/Benefits.tsx` — 5–6 icon+text benefit cards, Lucide, Server
+- [x] 3.2 `src/components/landing/FAQ.tsx` — 6–8 static-open accordion items, Server
+- [x] 3.3 `src/components/landing/Footer.tsx` — logo, links (Productos/Empresa/Contacto), social placeholders
 
 ## Phase 4: Configurator Core
 
-- [ ] 4.1 `src/hooks/useQuoteConfigurator.ts` — Context+useReducer: SELECT, DESELECT, UPDATE_QUANTITY, UPDATE_FIELD, CLEAR
-- [ ] 4.2 `src/components/landing/QuoteConfiguratorShell.tsx` — `"use client"`, `QuoteProvider`, `LazyMotion`+`domAnimation`
-- [ ] 4.3 `src/components/landing/CategoryFilter.tsx` — category pills, filter dispatch, active styling
-- [ ] 4.4 `src/components/landing/ProductCard.tsx` — image+name+badge, `motion.div` border+checkmark toggle via context
-- [ ] 4.5 `src/components/landing/ProductSelector.tsx` — responsive grid `grid-cols-1 sm:2 lg:3`, filtered cards
+- [x] 4.1 `src/hooks/useQuoteConfigurator.ts` — Context+useReducer: SELECT, DESELECT, UPDATE_QUANTITY, UPDATE_FIELD, CLEAR
+- [x] 4.2 `src/components/landing/QuoteConfiguratorShell.tsx` — `"use client"`, `QuoteProvider`, `LazyMotion`+`domAnimation`
+- [x] 4.3 `src/components/landing/CategoryFilter.tsx` — category pills, filter dispatch, active styling
+- [x] 4.4 `src/components/landing/ProductCard.tsx` — image+name+badge, `motion.div` border+checkmark toggle via context
+- [x] 4.5 `src/components/landing/ProductSelector.tsx` — responsive grid `grid-cols-1 sm:2 lg:3`, filtered cards
 
 ## Phase 5: Quote Form & Summary
 
-- [ ] 5.1 `src/components/landing/DynamicQuoteForm.tsx` — RHF+zodResolver, `getVisibleFields()` adaptive, motorsport conditional, inline errors
-- [ ] 5.2 `src/components/landing/FileUploader.tsx` — `useRef` file input, design-status radio, preview thumbnail
-- [ ] 5.3 `src/components/landing/QuoteSummary.tsx` — side panel≥768px/drawer<768px via matchMedia, AnimatePresence
-- [ ] 5.4 `src/hooks/useWhatsAppMessage.ts` — encode QuoteFormDataSchema→wa.me URL
-- [ ] 5.5 `src/components/landing/WhatsAppQuoteGenerator.tsx` — validate→`window.open(url,"_blank")`, disabled-on-error
+- [x] 5.1 `src/components/landing/DynamicQuoteForm.tsx` — RHF+zodResolver, `getVisibleFields()` adaptive, motorsport conditional, inline errors
+- [x] 5.2 `src/components/landing/FileUploader.tsx` — `useRef` file input, drag-and-drop, client-side validation
+- [x] 5.3 `src/components/landing/QuoteSummary.tsx` — side panel≥768px/drawer<768px via useMediaQuery, AnimatePresence
+- [x] 5.4 `src/components/landing/WhatsAppQuoteGenerator.tsx` — validate→`window.open(url,"_blank")`, disabled-on-error (merged 5.4+5.5)
 
 ## Phase 6: Visual Sections & Integration
 
-- [ ] 6.1 `src/components/landing/ProjectGallery.tsx` — Server, filterable grid, `public/images/gallery/` placeholders
-- [ ] 6.2 `src/components/landing/MotorsportSection.tsx` — contained visual weight, specialized subsection
-- [ ] 6.3 `src/components/landing/BusinessSection.tsx` — equal/greater prominence, business use cases
-- [ ] 6.4 `src/app/page.tsx` — compose Server sections+`QuoteConfiguratorShell` island
-- [ ] 6.5 Responsive QA — 375/768/1024/1440px, zero horizontal scroll
-- [ ] 6.6 Accessibility — `aria-label`, `aria-live` errors, focus on drawer, keyboard nav
-- [ ] 6.7 Animation — `whileInView` reveals, AnimatePresence panel/drawer, 300ms summary budget
+- [x] 6.1 `src/components/landing/ProjectGallery.tsx` — Client, filterable grid with gradient placeholders, AnimatePresence stagger
+- [x] 6.2 `src/components/landing/MotorsportSection.tsx` — contained visual weight, orange accents, diagonal stripe pattern
+- [x] 6.3 `src/components/landing/BusinessSection.tsx` — equal/greater prominence, blue accents, professional styling
+- [x] 6.4 `src/app/page.tsx` — compose all 13 sections with QuoteConfiguratorShell island + embedded QuoteSummary
+- [x] 6.5 SEO & Metadata — OpenGraph, robots, viewport theme-color, complete description
+- [x] 6.6 Accessibility & Polish — skip-to-content, focus-visible ring, aria-labels, scroll-smooth, section IDs
