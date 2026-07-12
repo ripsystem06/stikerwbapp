@@ -54,26 +54,17 @@ const BUSINESS_CARDS: BusinessCard[] = [
 
 export default function BusinessSection() {
   return (
-    <section id="empresas" className="relative overflow-hidden bg-surface py-24">
-      {/* Subtle blue accent glow */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -left-32 bottom-0 h-[300px] w-[300px] rounded-full opacity-[0.07]"
-        style={{
-          background:
-            "radial-gradient(ellipse at center, #0088FF 0%, transparent 70%)",
-        }}
-      />
-
+    <section id="empresas" className="relative overflow-hidden bg-background py-24">
       <div className="relative z-10 mx-auto max-w-6xl px-6">
         {/* Section header */}
         <div className="text-center">
-          <h2 className="text-3xl font-extrabold uppercase italic tracking-wide text-text-primary sm:text-4xl">
-            STICKERS QUE TRABAJAN
+          <h2 className="font-[family-name:var(--font-display)] text-3xl font-extrabold uppercase italic text-on-surface sm:text-4xl">
+            STICKERS QUE{" "}
+            <span className="text-secondary-container">TRABAJAN</span>
             <br />
             PARA TU MARCA
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-base text-text-secondary sm:text-lg">
+          <p className="mx-auto mt-4 max-w-xl text-base text-on-surface-variant sm:text-lg">
             Soluciones profesionales para empresas, productos y negocios.
             Diseño, producción y entrega con estándares empresariales.
           </p>
@@ -84,20 +75,20 @@ export default function BusinessSection() {
           {BUSINESS_CARDS.map((card) => (
             <div
               key={card.title}
-              className="group rounded-xl border border-surface-alt bg-background p-6 transition-all hover:border-accent-blue/30 hover:shadow-[0_0_20px_rgba(0,136,255,0.05)]"
+              className="group rounded-none border border-surface-container-high border-l-4 border-l-secondary-container bg-surface-container p-6 transition-colors hover:border-secondary-container/50"
             >
               {/* Icon */}
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-accent-blue/10 text-accent-blue">
-                <card.icon className="h-6 w-6" />
+              <div className="mb-4 flex h-8 w-8 items-center justify-center text-secondary-container">
+                <card.icon className="h-8 w-8" aria-hidden="true" />
               </div>
 
               {/* Title */}
-              <h3 className="mt-4 text-base font-bold text-text-primary">
+              <h3 className="mb-2 font-[family-name:var(--font-mono)] text-sm font-bold uppercase tracking-wider text-on-surface">
                 {card.title}
               </h3>
 
               {/* Description */}
-              <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+              <p className="text-sm leading-relaxed text-on-surface-variant">
                 {card.description}
               </p>
             </div>
@@ -108,7 +99,7 @@ export default function BusinessSection() {
         <div className="mt-14 text-center">
           <a
             href="#cotizar"
-            className="inline-flex items-center gap-2 rounded-lg border border-accent-blue/40 px-8 py-3.5 text-base font-bold uppercase tracking-wide text-accent-blue transition-all hover:border-accent-blue hover:bg-accent-blue/10 active:scale-[0.98]"
+            className="inline-flex items-center gap-2 rounded-none bg-secondary-container px-8 py-4 font-[family-name:var(--font-mono)] text-base font-bold uppercase text-on-secondary-container border-r-4 border-b-4 border-on-secondary-container transition-all hover:-translate-y-0.5 active:translate-y-0"
           >
             <Building2 className="h-5 w-5" aria-hidden="true" />
             SOLICITAR COTIZACIÓN EMPRESARIAL

@@ -49,37 +49,35 @@ export default function MotorsportSection() {
   return (
     <section
       id="motorsport"
-      className="relative overflow-hidden border-t-2 border-primary/30 bg-background py-24"
+      className="relative overflow-hidden border-y border-surface-container-high bg-background py-24"
     >
-      {/* Diagonal stripe pattern background */}
+      {/* Speed lines overlay */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(-45deg, #FF6B00, #FF6B00 1px, transparent 1px, transparent 12px)",
-        }}
+        className="pointer-events-none absolute inset-0 bg-speed-lines"
       />
 
-      {/* Aggressive diagonal accent glow */}
+      {/* Tech grid with orange-tinted lines */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-32 top-0 h-[400px] w-[400px] rotate-12 rounded-full opacity-10"
+        className="pointer-events-none absolute inset-0"
         style={{
-          background:
-            "radial-gradient(ellipse at center, #FF6B00 0%, transparent 70%)",
+          backgroundImage:
+            "linear-gradient(to right, rgba(254,88,37,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(254,88,37,0.06) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
         }}
       />
 
       <div className="relative z-10 mx-auto max-w-6xl px-6">
         {/* Section header */}
         <div className="text-center">
-          <h2 className="text-3xl font-extrabold italic tracking-tight text-text-primary sm:text-4xl md:text-5xl">
-            BUILT FOR SPEED.
+          <h2 className="font-[family-name:var(--font-display)] text-3xl font-extrabold uppercase italic text-on-surface sm:text-4xl md:text-5xl">
+            BUILT FOR{" "}
+            <span className="text-primary-container">SPEED</span>.
             <br />
             DESIGNED TO STAND OUT.
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-text-secondary sm:text-lg">
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-on-surface-variant sm:text-lg">
             Diseño y producción de gráficos personalizados para pilotos,
             equipos, motos, UTV, off-road y vehículos de competencia.
           </p>
@@ -90,20 +88,20 @@ export default function MotorsportSection() {
           {MOTORSPORT_CARDS.map((card) => (
             <div
               key={card.title}
-              className="group relative overflow-hidden rounded-xl border-l-4 border-primary bg-surface-alt/80 p-6 transition-colors hover:bg-surface-alt"
+              className="group rounded-none border border-surface-container-high border-l-4 border-l-primary-container bg-surface-container p-6 transition-colors hover:border-primary-container/50"
             >
               {/* Icon */}
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/15 text-primary">
-                <card.icon className="h-6 w-6" />
+              <div className="mb-4 flex h-8 w-8 items-center justify-center text-primary-container">
+                <card.icon className="h-8 w-8" aria-hidden="true" />
               </div>
 
               {/* Title */}
-              <h3 className="mt-4 text-base font-bold uppercase tracking-wide text-text-primary">
+              <h3 className="mb-2 font-[family-name:var(--font-mono)] text-sm font-bold uppercase tracking-wider text-on-surface">
                 {card.title}
               </h3>
 
               {/* Description */}
-              <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+              <p className="text-sm leading-relaxed text-on-surface-variant">
                 {card.description}
               </p>
             </div>
@@ -114,7 +112,7 @@ export default function MotorsportSection() {
         <div className="mt-14 text-center">
           <a
             href="#cotizar"
-            className="inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-3.5 text-base font-bold uppercase tracking-wide text-white transition-all hover:bg-primary-hover hover:shadow-[0_0_30px_rgba(255,107,0,0.3)] active:scale-[0.98]"
+            className="inline-flex items-center gap-2 rounded-none bg-primary-container px-8 py-4 font-[family-name:var(--font-mono)] text-base font-bold uppercase text-black border-r-4 border-b-4 border-on-primary-container transition-all hover:-translate-y-0.5 active:translate-y-0"
           >
             <Flag className="h-5 w-5" aria-hidden="true" />
             COTIZAR PROYECTO MOTORSPORT
