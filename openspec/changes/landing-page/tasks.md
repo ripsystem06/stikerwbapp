@@ -28,9 +28,9 @@ Chain strategy: stacked-to-main
 
 ## Phase 2: Static Sections A
 
-- [ ] 2.1 `src/components/landing/Header.tsx` — Server, logo+nav (no cart), sticky+scroll background
-- [ ] 2.2 `src/components/landing/Hero.tsx` — four verticals, `motion.div` fade-up+stagger, "Solicitar Cotización" CTA
-- [ ] 2.3 `src/components/landing/ProcessSteps.tsx` — 3-step timeline (Elegí→Completá→Recibí), Lucide, Server
+- [x] 2.1 `src/components/landing/Header.tsx` — Server, logo+nav (no cart), sticky+scroll background
+- [x] 2.2 `src/components/landing/Hero.tsx` — four verticals, `motion.div` fade-up+stagger, "Solicitar Cotización" CTA
+- [x] 2.3 `src/components/landing/ProcessSteps.tsx` — 3-step timeline (Elegí→Completá→Recibí), Lucide, Server
 
 ## Phase 3: Static Sections B
 
