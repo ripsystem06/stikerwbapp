@@ -94,21 +94,12 @@ export default function ProductCard({ product }: ProductCardProps) {
           {product.description}
         </p>
 
-        {/* Action button */}
-        <button
-          type="button"
-          onClick={(e: React.MouseEvent) => {
-            e.stopPropagation();
-            handleToggle();
-          }}
-          className={`mt-4 w-full rounded-lg px-4 py-2 text-sm font-semibold transition-colors ${
-            selected
-              ? "bg-red-900/30 text-red-400 hover:bg-red-900/50"
-              : "border border-primary/40 text-primary hover:border-primary hover:bg-primary/10"
-          }`}
-        >
-          {selected ? "Quitar" : "Agregar a cotización"}
-        </button>
+        {/* Selected indicator */}
+        {selected && (
+          <p className="mt-3 text-xs font-medium text-primary">
+            Seleccionado
+          </p>
+        )}
       </div>
     </m.div>
   );
