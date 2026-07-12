@@ -1,0 +1,65 @@
+schema: spec-driven
+
+context: |
+  Project: stikers — Landing page for custom sticker design, manufacturing, and sales.
+  Stack: Next.js (App Router), React 19+, TypeScript 5.7+, Tailwind CSS 4, Framer Motion, Lucide Icons, React Hook Form, Zod.
+  Architecture: Server Components first, client islands for interactive quote configurator. No e-commerce — visual configurator + WhatsApp final submission.
+  Markets: Businesses, brands, packaging, restaurants, sports teams, events, schools, automotive, motocross, off-road, UTV, motorsport, and individuals.
+  Specialized vertical: Motorsport/off-road (not the only focus).
+
+strict_tdd: false
+reason: No package.json or test runner detected — project not yet scaffolded. Will re-detect after `npx create-next-app`.
+
+testing:
+  runner:
+    command: ""
+    framework: "None — project not scaffolded"
+  layers:
+    unit: false
+    integration: false
+    e2e: false
+  coverage: false
+  quality:
+    linter: false
+    type_checker: false
+    formatter: false
+
+delivery:
+  strategy: auto-forecast
+  chain_strategy: not-determined
+
+artifact_store:
+  mode: openspec
+  path: openspec/
+
+rules:
+  proposal:
+    - Include rollback plan for risky changes
+    - State affected markets/verticals when relevant
+  specs:
+    - Use Given/When/Then for scenarios
+    - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY)
+    - Keep scenarios focused on user-visible behavior
+  design:
+    - Include component tree for UI changes
+    - Document animation states (Framer Motion variants)
+    - Justify Server vs Client Component decisions
+    - Zod schemas must be documented alongside form designs
+  tasks:
+    - Group by phase, use hierarchical numbering (1.1, 1.2, ...)
+    - Keep tasks completable in one session
+    - Mark test-writing tasks before implementation tasks (TDD when enabled)
+  apply:
+    - Follow existing code patterns
+    - TypeScript strict mode for all new code
+    - Tailwind utility classes preferred over custom CSS
+    - Use Lucide Icons only; no other icon libraries
+    tdd: false
+    test_command: ""
+  verify:
+    test_command: ""
+    build_command: "npm run build"
+    coverage_threshold: 0
+  archive:
+    - Warn before merging destructive deltas
+    - Update main specs to reflect merged changes
