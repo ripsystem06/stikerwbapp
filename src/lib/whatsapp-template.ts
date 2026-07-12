@@ -67,7 +67,7 @@ export function buildWhatsAppMessage(data: QuoteFormData): string {
   lines.push("");
 
   // Products
-  lines.push("🛒 *Productos solicitados*");
+  lines.push("📋 *Productos solicitados*");
   lines.push("");
 
   data.items.forEach((item, index) => {
