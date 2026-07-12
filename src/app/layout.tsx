@@ -1,15 +1,24 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Anybody, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const anybody = Anybody({
   subsets: ["latin"],
+  weight: ["700", "800", "900"],
+  style: ["normal", "italic"],
+  variable: "--font-anybody",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const hankenGrotesk = Hanken_Grotesk({
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-hanken-grotesk",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-jetbrains-mono",
 });
 
 export const metadata: Metadata = {
@@ -27,7 +36,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0a",
+  themeColor: "#131313",
 };
 
 export default function RootLayout({
@@ -38,13 +47,13 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`dark scroll-smooth ${geistSans.variable} ${geistMono.variable}`}
+      className={`dark scroll-smooth ${anybody.variable} ${hankenGrotesk.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="bg-background text-text-primary font-sans antialiased min-h-screen flex flex-col">
+      <body className="bg-background text-on-background font-sans antialiased min-h-screen flex flex-col">
         {/* Skip to content link */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white focus:outline-none"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-primary-container focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-on-primary-container focus:outline-none"
         >
           Saltar al contenido principal
         </a>

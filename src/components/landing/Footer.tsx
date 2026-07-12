@@ -1,133 +1,102 @@
-import { Camera, Share2, MessageCircle } from "lucide-react";
+import Link from "next/link";
 
 interface FooterLink {
   label: string;
   href: string;
 }
 
-const PRODUCTOS_LINKS: FooterLink[] = [
-  { label: "Stickers personalizados", href: "#productos" },
-  { label: "Empresas y marcas", href: "#empresas" },
-  { label: "Motorsport", href: "#motorsport" },
-  { label: "Etiquetas", href: "#productos" },
-  { label: "Packaging", href: "#productos" },
-  { label: "Eventos", href: "#productos" },
+const NAVEGACION_LINKS: FooterLink[] = [
+  { label: "Inicio", href: "/" },
+  { label: "Productos", href: "#productos" },
+  { label: "Proyectos", href: "#proyectos" },
+  { label: "Cómo funciona", href: "#como-funciona" },
 ];
 
 const EMPRESA_LINKS: FooterLink[] = [
-  { label: "Sobre nosotros", href: "#nosotros" },
+  { label: "Nosotros", href: "#nosotros" },
   { label: "Contacto", href: "#contacto" },
-  { label: "WhatsApp", href: "https://wa.me/521234567890" },
-  { label: "Cotizar", href: "#productos" },
+];
+
+const LEGAL_LINKS: FooterLink[] = [
+  { label: "Aviso de privacidad", href: "#privacidad" },
+  { label: "Términos y condiciones", href: "#terminos" },
 ];
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="border-t border-surface-alt bg-background">
-      {/* Main footer content */}
-      <div className="mx-auto max-w-6xl px-6 py-16">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Column 1 — Logo + description */}
-          <div className="sm:col-span-2 lg:col-span-1">
-            <div className="flex items-center gap-1.5 text-lg font-bold tracking-tight text-text-primary">
-              <span>STIKERS</span>
-              <span className="inline-block h-1.5 w-1.5 rounded-sm bg-primary" />
-            </div>
-            <p className="mt-3 text-sm leading-relaxed text-text-secondary">
-              Diseñamos y producimos stickers personalizados de alta calidad.
-              Tu idea, tu marca, tu sticker.
-            </p>
+    <footer className="bg-surface-container-lowest border-t border-outline-variant">
+      <div className="mx-auto max-w-[1600px] px-8 py-16">
+        {/* 4-column grid */}
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
+          {/* Column 1 — Logo */}
+          <div className="flex flex-col gap-4">
+            <Link href="/" className="flex flex-col leading-none">
+              <span className="font-[family-name:var(--font-anybody)] text-lg font-bold italic text-on-surface">
+                STIKERS
+              </span>
+              <span className="font-[family-name:var(--font-jetbrains-mono)] text-xs uppercase tracking-widest text-primary-container mt-1 not-italic">
+                Stickers Custom
+              </span>
+            </Link>
           </div>
 
-          {/* Column 2 — Productos */}
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-wide text-text-primary">
-              Productos
-            </h3>
-            <ul className="mt-4 space-y-2.5">
-              {PRODUCTOS_LINKS.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-text-secondary transition-colors hover:text-primary"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          {/* Column 2 — Navegación */}
+          <div className="flex flex-col gap-2">
+            <h4 className="font-[family-name:var(--font-jetbrains-mono)] text-xs font-medium uppercase tracking-widest text-on-surface mb-2">
+              Navegación
+            </h4>
+            {NAVEGACION_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="font-[family-name:var(--font-jetbrains-mono)] text-sm text-on-surface-variant transition-colors hover:text-primary-container"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
 
           {/* Column 3 — Empresa */}
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-wide text-text-primary">
+          <div className="flex flex-col gap-2">
+            <h4 className="font-[family-name:var(--font-jetbrains-mono)] text-xs font-medium uppercase tracking-widest text-on-surface mb-2">
               Empresa
-            </h3>
-            <ul className="mt-4 space-y-2.5">
-              {EMPRESA_LINKS.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-text-secondary transition-colors hover:text-primary"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            </h4>
+            {EMPRESA_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="font-[family-name:var(--font-jetbrains-mono)] text-sm text-on-surface-variant transition-colors hover:text-primary-container"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
 
-          {/* Column 4 — Contacto */}
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-wide text-text-primary">
-              Contacto
-            </h3>
-            <ul className="mt-4 space-y-2.5 text-sm text-text-secondary">
-              <li>hola@stikers.com</li>
-              <li>+52 1 23 4567 8901</li>
-              <li>Ciudad de México, México</li>
-            </ul>
-
-            {/* Social icons */}
-            <div className="mt-5 flex items-center gap-4">
+          {/* Column 4 — Legal */}
+          <div className="flex flex-col gap-2">
+            <h4 className="font-[family-name:var(--font-jetbrains-mono)] text-xs font-medium uppercase tracking-widest text-on-surface mb-2">
+              Legal
+            </h4>
+            {LEGAL_LINKS.map((link) => (
               <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="text-text-secondary transition-colors hover:text-primary"
+                key={link.href}
+                href={link.href}
+                className="font-[family-name:var(--font-jetbrains-mono)] text-sm text-on-surface-variant transition-colors hover:text-primary-container"
               >
-                <Camera className="h-5 w-5" />
+                {link.label}
               </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="text-text-secondary transition-colors hover:text-primary"
-              >
-                <Share2 className="h-5 w-5" />
-              </a>
-              <a
-                href="https://wa.me/521234567890"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp"
-                className="text-text-secondary transition-colors hover:text-primary"
-              >
-                <MessageCircle className="h-5 w-5" />
-              </a>
-            </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-surface-alt">
-        <div className="mx-auto max-w-6xl px-6 py-5">
-          <p className="text-center text-xs text-text-secondary">
-            &copy; {new Date().getFullYear()} Stikers. Todos los derechos
-            reservados.
+      {/* Copyright bar */}
+      <div className="border-t border-outline-variant">
+        <div className="mx-auto max-w-[1600px] px-8 py-5">
+          <p className="text-center text-sm text-on-surface-variant">
+            &copy; {currentYear} Stikers. Todos los derechos reservados.
           </p>
         </div>
       </div>
