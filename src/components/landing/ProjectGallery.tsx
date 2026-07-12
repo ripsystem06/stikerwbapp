@@ -221,14 +221,14 @@ function FeaturedComparison({ item }: { item: GalleryItem }) {
       {stages.map((stage, i) => (
         <div key={stage.label} className="flex flex-1 flex-col items-center gap-1">
           <div
-            className={`h-10 w-full rounded bg-gradient-to-br ${stage.gradient}`}
+            className={`h-10 w-full rounded-none bg-gradient-to-br ${stage.gradient}`}
             aria-hidden="true"
           />
-          <span className="text-[10px] font-bold uppercase tracking-wider text-text-secondary">
+          <span className="font-[family-name:var(--font-mono)] text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
             {stage.label}
           </span>
           {i < stages.length - 1 && (
-            <span className="hidden text-[10px] text-primary/60 sm:inline">
+            <span className="hidden font-[family-name:var(--font-mono)] text-[10px] text-primary-container sm:inline">
               →
             </span>
           )}
@@ -244,38 +244,37 @@ function GalleryCard({ item }: { item: GalleryItem }) {
     <m.div
       layout
       variants={itemFadeUp}
-      className="group relative cursor-pointer overflow-hidden rounded-xl"
+      className="group relative cursor-pointer overflow-hidden rounded-none border border-surface-bright bg-surface-container transition-colors hover:border-primary-container"
     >
+      {/* Dog-ear corner */}
+      <div
+        className="absolute right-0 top-0 z-10 h-12 w-12 translate-x-6 -translate-y-6 rotate-45 border-b border-l border-surface-bright bg-surface-container-lowest"
+        aria-hidden="true"
+      />
+
       {/* Gradient placeholder */}
-      <div
-        className={`aspect-[3/4] w-full bg-gradient-to-br ${item.gradient}`}
-        aria-hidden="true"
-      />
-      {/* Subtle dot pattern overlay */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, #ffffff 1px, transparent 1px)",
-          backgroundSize: "16px 16px",
-        }}
-        aria-hidden="true"
-      />
-      {/* Hover overlay */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-        <span className="rounded-lg bg-primary/20 px-4 py-2 text-sm font-bold text-white backdrop-blur-sm">
-          Ver proyecto
-        </span>
-        <span className="mt-2 text-xs text-text-secondary">
+      <div className="relative h-56 overflow-hidden bg-surface-container-low">
+        <div
+          className={`h-full w-full bg-gradient-to-br transition-transform duration-700 group-hover:scale-105 ${item.gradient}`}
+          aria-hidden="true"
+        />
+        {/* Category tag */}
+        <span className="absolute left-3 top-3 rounded-none border border-surface-bright bg-surface-container-highest/90 px-2 py-0.5 font-[family-name:var(--font-mono)] text-[10px] uppercase text-on-surface">
           {item.category}
         </span>
       </div>
-      {/* Category tag */}
-      <span className="absolute left-3 top-3 rounded-full bg-black/70 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-sm">
-        {item.category}
-      </span>
-      {/* Featured comparison strip */}
-      {item.isFeatured && <FeaturedComparison item={item} />}
+
+      {/* Content */}
+      <div className="p-5">
+        <p className="font-[family-name:var(--font-display)] text-sm uppercase italic text-on-surface">
+          Proyecto {item.id.replace("g", "")}
+        </p>
+        <p className="mt-1 text-sm text-on-surface-variant">
+          {item.isFeatured ? "Proyecto destacado" : item.category}
+        </p>
+        {/* Featured comparison strip */}
+        {item.isFeatured && <FeaturedComparison item={item} />}
+      </div>
     </m.div>
   );
 }
@@ -293,73 +292,82 @@ export default function ProjectGallery() {
 
   return (
     <section className="relative overflow-hidden bg-background py-24">
-      {/* Section header */}
-      <div className="mx-auto max-w-6xl px-6 text-center">
-        <h2 className="text-3xl font-extrabold uppercase italic tracking-wide text-text-primary sm:text-4xl">
-          PROYECTOS QUE HABLAN
-          <br />
-          POR SÍ SOLOS
-        </h2>
-        <p className="mx-auto mt-4 max-w-xl text-base text-text-secondary sm:text-lg">
-          Cada proyecto es único. Mirá algunos de nuestros trabajos y descubrí
-          lo que podemos hacer por tu marca.
-        </p>
-      </div>
+      {/* Tech grid overlay */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-tech-grid"
+      />
 
-      {/* Filter tabs */}
-      <div className="mx-auto mt-10 flex max-w-3xl flex-wrap justify-center gap-2 px-6">
-        {ALL_CATEGORIES.map((category) => (
-          <button
-            key={category}
-            type="button"
-            onClick={() => setActiveFilter(category)}
-            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-              activeFilter === category
-                ? "bg-primary text-white"
-                : "bg-surface-alt text-text-secondary hover:bg-surface-alt/80 hover:text-text-primary"
-            }`}
-            aria-pressed={activeFilter === category}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
+      <div className="relative z-10">
+        {/* Section header */}
+        <div className="mx-auto max-w-6xl px-6 text-center">
+          <h2 className="font-[family-name:var(--font-display)] text-3xl font-extrabold uppercase italic tracking-wide text-on-surface sm:text-4xl">
+            PROYECTOS QUE{" "}
+            <span className="text-primary-container">HABLAN</span>
+            <br />
+            POR SÍ SOLOS
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-base text-on-surface-variant sm:text-lg">
+            Cada proyecto es único. Mirá algunos de nuestros trabajos y descubrí
+            lo que podemos hacer por tu marca.
+          </p>
+        </div>
 
-      {/* Gallery grid */}
-      <div className="mx-auto mt-12 max-w-6xl px-6">
-        <AnimatePresence mode="wait">
-          {filteredItems.length === 0 ? (
-            <m.p
-              key="empty"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="py-16 text-center text-text-secondary"
+        {/* Filter tabs */}
+        <div className="mx-auto mt-10 flex max-w-3xl flex-wrap justify-center gap-2 px-6">
+          {ALL_CATEGORIES.map((category) => (
+            <button
+              key={category}
+              type="button"
+              onClick={() => setActiveFilter(category)}
+              className={`rounded-none border px-4 py-1.5 font-[family-name:var(--font-mono)] text-xs uppercase transition-colors ${
+                activeFilter === category
+                  ? "border-primary-container bg-primary-container text-black"
+                  : "border-surface-bright bg-surface-container-high text-on-surface-variant hover:border-surface-container-highest hover:text-on-surface"
+              }`}
+              aria-pressed={activeFilter === category}
             >
-              No hay proyectos en esta categoría todavía.{" "}
-              <button
-                type="button"
-                onClick={() => setActiveFilter("Todos")}
-                className="font-medium text-primary hover:underline"
+              {category}
+            </button>
+          ))}
+        </div>
+
+        {/* Gallery grid */}
+        <div className="mx-auto mt-12 max-w-6xl px-6">
+          <AnimatePresence mode="wait">
+            {filteredItems.length === 0 ? (
+              <m.p
+                key="empty"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="py-16 text-center text-on-surface-variant"
               >
-                Ver todos
-              </button>
-            </m.p>
-          ) : (
-            <m.div
-              key={activeFilter}
-              className="grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-4"
-              variants={gridStagger}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-            >
-              {filteredItems.map((item) => (
-                <GalleryCard key={item.id} item={item} />
-              ))}
-            </m.div>
-          )}
-        </AnimatePresence>
+                No hay proyectos en esta categoría todavía.{" "}
+                <button
+                  type="button"
+                  onClick={() => setActiveFilter("Todos")}
+                  className="font-medium text-primary-container hover:underline"
+                >
+                  Ver todos
+                </button>
+              </m.p>
+            ) : (
+              <m.div
+                key={activeFilter}
+                className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+                variants={gridStagger}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+              >
+                {filteredItems.map((item) => (
+                  <GalleryCard key={item.id} item={item} />
+                ))}
+              </m.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );
