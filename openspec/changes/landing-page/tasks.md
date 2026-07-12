@@ -6,7 +6,7 @@
 
 Decision needed before apply: Yes
 Chained PRs recommended: Yes
-Chain strategy: pending
+Chain strategy: stacked-to-main
 400-line budget risk: High
 
 **Suggested chain** (6 PRs, feature-branch or stacked):
@@ -19,12 +19,12 @@ Chain strategy: pending
 
 ## Phase 1: Foundation
 
-- [ ] 1.1 `src/app/globals.css` — `@theme inline`: dark tokens (background, surface, primary #FF6B00, accents, text, fonts)
-- [ ] 1.2 `src/app/layout.tsx` — metadata, `<html class="dark">`, Geist fonts via `next/font`, flex-column body
-- [ ] 1.3 `src/lib/schemas.ts` — `ProductCategory`, `ProductSchema`, `QuoteItemSchema`, `QuoteFormDataSchema` (Zod)
-- [ ] 1.4 `src/lib/products.ts` — 12–15 products: motorcycles, UTVs, cars, business, packaging, events, school, sports
-- [ ] 1.5 `src/lib/field-config.ts` — `FIELD_MAP` with `appliesTo`, `getVisibleFields(categories)`; motorsport gated to `["motorsport"]`
-- [ ] 1.6 `src/lib/whatsapp-template.ts` — `buildWhatsAppMessage()`, `BUSINESS_PHONE`
+- [x] 1.1 `src/app/globals.css` — `@theme inline`: dark tokens (background, surface, primary #FF6B00, accents, text, fonts)
+- [x] 1.2 `src/app/layout.tsx` — metadata, `<html class="dark">`, Geist fonts via `next/font`, flex-column body
+- [x] 1.3 `src/lib/schemas.ts` — `ProductCategory`, `ProductSchema`, `QuoteItemSchema`, `QuoteFormDataSchema` (Zod)
+- [x] 1.4 `src/lib/products.ts` — 12–15 products: motorcycles, UTVs, cars, business, packaging, events, school, sports
+- [x] 1.5 `src/lib/field-config.ts` — `FIELD_MAP` with `appliesTo`, `getVisibleFields(categories)`; motorsport gated to `["motorsport"]`
+- [x] 1.6 `src/lib/whatsapp-template.ts` — `buildWhatsAppMessage()`, `BUSINESS_PHONE`
 
 ## Phase 2: Static Sections A
 
