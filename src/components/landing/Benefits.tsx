@@ -75,39 +75,45 @@ const BENEFITS: BenefitCard[] = [
 export default function Benefits() {
   return (
     <section className="relative overflow-hidden bg-background py-24">
-      {/* Section header */}
-      <div className="mx-auto max-w-6xl px-6 text-center">
-        <h2 className="text-3xl font-extrabold uppercase italic tracking-wide text-text-primary sm:text-4xl">
-          HECHOS PARA DESTACAR.
-          <br />
-          DISEÑADOS PARA DURAR.
-        </h2>
-        <p className="mx-auto mt-4 max-w-xl text-base text-text-secondary sm:text-lg">
-          Cada sticker que producimos combina tecnología, materiales premium y
-          un equipo que entiende lo que tu marca necesita.
-        </p>
-      </div>
+      {/* Speed lines overlay */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-speed-lines"
+      />
 
-      {/* Benefits grid */}
-      <div className="mx-auto mt-16 max-w-6xl px-6">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="relative z-10 mx-auto max-w-6xl px-6">
+        {/* Section header */}
+        <div className="text-center">
+          <h2 className="font-[family-name:var(--font-display)] text-3xl font-extrabold uppercase italic tracking-wide text-on-surface sm:text-4xl">
+            HECHOS PARA DESTACAR.
+            <br />
+            DISEÑADOS PARA DURAR.
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-base text-on-surface-variant sm:text-lg">
+            Cada sticker que producimos combina tecnología, materiales premium y
+            un equipo que entiende lo que tu marca necesita.
+          </p>
+        </div>
+
+        {/* Benefits grid */}
+        <div className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {BENEFITS.map((benefit) => (
             <div
               key={benefit.title}
-              className="group rounded-xl border border-surface-alt bg-surface p-6 transition-colors hover:border-primary/50"
+              className="group rounded-none border border-surface-container-high bg-surface-container p-6 transition-colors hover:border-primary-container/50"
             >
               {/* Icon */}
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                <benefit.icon className="h-6 w-6" />
+              <div className="mb-4 flex h-8 w-8 items-center justify-center text-primary-container">
+                <benefit.icon className="h-8 w-8" aria-hidden="true" />
               </div>
 
               {/* Title */}
-              <h3 className="mt-4 text-base font-bold text-text-primary">
+              <h3 className="mb-2 font-[family-name:var(--font-mono)] text-sm font-bold uppercase tracking-wider text-on-surface">
                 {benefit.title}
               </h3>
 
               {/* Description */}
-              <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+              <p className="text-sm leading-relaxed text-on-surface-variant">
                 {benefit.description}
               </p>
             </div>

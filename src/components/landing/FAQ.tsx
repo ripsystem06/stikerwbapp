@@ -67,31 +67,32 @@ const FAQ_ITEMS: FAQItem[] = [
 
 export default function FAQ() {
   return (
-    <section className="relative overflow-hidden bg-surface py-24">
+    <section className="relative overflow-hidden bg-background py-24">
       <div className="mx-auto max-w-3xl px-6">
         {/* Section header */}
-        <h2 className="text-center text-3xl font-extrabold uppercase italic tracking-wide text-text-primary sm:text-4xl">
+        <h2 className="text-center font-[family-name:var(--font-display)] text-3xl font-extrabold uppercase italic tracking-wide text-on-surface sm:text-4xl">
           PREGUNTAS
           <br />
           FRECUENTES
         </h2>
 
         {/* FAQ items */}
-        <div className="mt-14 divide-y divide-surface-alt rounded-xl border border-surface-alt bg-background">
+        <div className="mt-14 border-t border-surface-container-high">
           {FAQ_ITEMS.map((item) => (
             <details
               key={item.question}
               open={item.open}
-              className="group"
+              className="group border-b border-surface-container-high"
             >
-              <summary className="flex cursor-pointer items-center justify-between px-6 py-5 font-semibold text-text-primary transition-colors hover:text-primary select-none">
-                <span className="pr-4 text-sm sm:text-base">
-                  {item.question}
-                </span>
-                <ChevronDown className="h-5 w-5 shrink-0 text-text-secondary transition-transform duration-200 group-open:rotate-180" />
+              <summary className="flex cursor-pointer items-center justify-between py-5 font-[family-name:var(--font-mono)] text-sm font-bold uppercase text-on-surface transition-colors hover:text-primary-container select-none">
+                <span className="pr-4">{item.question}</span>
+                <ChevronDown
+                  className="h-5 w-5 shrink-0 text-primary-container transition-transform duration-200 group-open:rotate-180"
+                  aria-hidden="true"
+                />
               </summary>
-              <div className="px-6 pb-5">
-                <p className="text-sm leading-relaxed text-text-secondary">
+              <div className="pb-5">
+                <p className="text-sm leading-relaxed text-on-surface-variant">
                   {item.answer}
                 </p>
               </div>
