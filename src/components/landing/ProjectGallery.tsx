@@ -8,7 +8,11 @@ type GalleryCategory =
   | "Negocios"
   | "Productos"
   | "Packaging"
+  | "Alimentos"
+  | "Deportes"
   | "Motorsport"
+  | "Motocross"
+  | "Off-road"
   | "Vehículos"
   | "Eventos"
   | "Especiales";
@@ -25,7 +29,11 @@ const ALL_CATEGORIES: ("Todos" | GalleryCategory)[] = [
   "Negocios",
   "Productos",
   "Packaging",
+  "Alimentos",
+  "Deportes",
   "Motorsport",
+  "Motocross",
+  "Off-road",
   "Vehículos",
   "Eventos",
   "Especiales",
@@ -33,6 +41,7 @@ const ALL_CATEGORIES: ("Todos" | GalleryCategory)[] = [
 
 // ── Gallery data ───────────────────────────────────────────
 const GALLERY_ITEMS: GalleryItem[] = [
+  // ── Negocios (2) ──
   {
     id: "g1",
     category: "Negocios",
@@ -41,68 +50,138 @@ const GALLERY_ITEMS: GalleryItem[] = [
   },
   {
     id: "g2",
-    category: "Packaging",
-    gradient: "from-emerald-900 via-teal-900 to-cyan-900",
+    category: "Negocios",
+    gradient: "from-slate-800 via-gray-800 to-zinc-800",
     isFeatured: false,
   },
+  // ── Productos (2) ──
   {
     id: "g3",
-    category: "Motorsport",
-    gradient: "from-orange-900 via-red-900 to-amber-900",
-    isFeatured: true,
-  },
-  {
-    id: "g4",
-    category: "Vehículos",
-    gradient: "from-blue-900 via-indigo-900 to-violet-900",
-    isFeatured: false,
-  },
-  {
-    id: "g5",
-    category: "Eventos",
-    gradient: "from-pink-900 via-rose-900 to-fuchsia-900",
-    isFeatured: false,
-  },
-  {
-    id: "g6",
     category: "Productos",
     gradient: "from-cyan-900 via-sky-900 to-blue-900",
     isFeatured: false,
   },
   {
-    id: "g7",
-    category: "Negocios",
-    gradient: "from-slate-800 via-gray-800 to-zinc-800",
+    id: "g4",
+    category: "Productos",
+    gradient: "from-teal-900 via-emerald-900 to-green-900",
+    isFeatured: false,
+  },
+  // ── Packaging (2) ──
+  {
+    id: "g12",
+    category: "Packaging",
+    gradient: "from-emerald-900 via-teal-900 to-cyan-900",
     isFeatured: false,
   },
   {
-    id: "g8",
-    category: "Especiales",
-    gradient: "from-amber-900 via-yellow-900 to-orange-900",
-    isFeatured: true,
-  },
-  {
-    id: "g9",
-    category: "Motorsport",
-    gradient: "from-red-900 via-orange-900 to-yellow-900",
-    isFeatured: false,
-  },
-  {
-    id: "g10",
+    id: "g6",
     category: "Packaging",
     gradient: "from-green-900 via-lime-900 to-emerald-900",
     isFeatured: false,
   },
+  // ── Alimentos (2) ──
+  {
+    id: "g7",
+    category: "Alimentos",
+    gradient: "from-amber-900 via-yellow-900 to-orange-900",
+    isFeatured: false,
+  },
+  {
+    id: "g8",
+    category: "Alimentos",
+    gradient: "from-orange-900 via-red-900 to-rose-900",
+    isFeatured: false,
+  },
+  // ── Deportes (2) ──
+  {
+    id: "g9",
+    category: "Deportes",
+    gradient: "from-blue-900 via-cyan-900 to-teal-900",
+    isFeatured: false,
+  },
+  {
+    id: "g10",
+    category: "Deportes",
+    gradient: "from-red-900 via-orange-900 to-amber-900",
+    isFeatured: false,
+  },
+  // ── Motorsport (2) ──
+  {
+    id: "g5",
+    category: "Motorsport",
+    gradient: "from-orange-900 via-red-900 to-amber-900",
+    isFeatured: true,
+  },
   {
     id: "g11",
+    category: "Motorsport",
+    gradient: "from-red-900 via-orange-900 to-yellow-900",
+    isFeatured: false,
+  },
+  // ── Motocross (2) ──
+  {
+    id: "g13",
+    category: "Motocross",
+    gradient: "from-lime-900 via-green-900 to-emerald-900",
+    isFeatured: false,
+  },
+  {
+    id: "g14",
+    category: "Motocross",
+    gradient: "from-yellow-900 via-amber-900 to-orange-900",
+    isFeatured: false,
+  },
+  // ── Off-road (2) ──
+  {
+    id: "g23",
+    category: "Off-road",
+    gradient: "from-stone-800 via-neutral-800 to-zinc-800",
+    isFeatured: false,
+  },
+  {
+    id: "g24",
+    category: "Off-road",
+    gradient: "from-zinc-900 via-stone-900 to-neutral-900",
+    isFeatured: false,
+  },
+  // ── Vehículos (2) ──
+  {
+    id: "g17",
+    category: "Vehículos",
+    gradient: "from-blue-900 via-indigo-900 to-violet-900",
+    isFeatured: false,
+  },
+  {
+    id: "g18",
     category: "Vehículos",
     gradient: "from-violet-900 via-purple-900 to-fuchsia-900",
     isFeatured: false,
   },
+  // ── Eventos (2) ──
   {
-    id: "g12",
+    id: "g19",
+    category: "Eventos",
+    gradient: "from-pink-900 via-rose-900 to-fuchsia-900",
+    isFeatured: false,
+  },
+  {
+    id: "g20",
     category: "Eventos",
     gradient: "from-rose-900 via-pink-900 to-orange-900",
+    isFeatured: false,
+  },
+  // ── Especiales (2) ──
+  {
+    id: "g15",
+    category: "Especiales",
+    gradient: "from-violet-900 via-fuchsia-900 to-rose-900",
+    isFeatured: true,
+  },
+  {
+    id: "g21",
+    category: "Especiales",
+    gradient: "from-fuchsia-900 via-purple-900 to-indigo-900",
     isFeatured: false,
   },
 ];
