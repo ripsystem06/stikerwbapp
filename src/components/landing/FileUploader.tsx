@@ -82,7 +82,7 @@ export default function FileUploader({
   return (
     <div className="space-y-3">
       {label && (
-        <label className="block text-sm font-medium text-text-secondary">
+        <label className="mb-1 block font-[family-name:var(--font-mono)] text-xs font-medium uppercase tracking-wider text-on-surface-variant">
           {label}
         </label>
       )}
@@ -100,20 +100,20 @@ export default function FileUploader({
             openFileDialog();
           }
         }}
-        className={`flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed px-6 py-8 transition-colors ${
+        className={`flex cursor-pointer flex-col items-center justify-center rounded-none border-2 border-dashed border-surface-container-high bg-surface-container-low p-8 text-center transition-colors ${
           isDragging
-            ? "border-primary bg-primary/10"
-            : "border-surface-alt bg-surface hover:border-text-secondary/50"
+            ? "border-primary-container bg-primary-container/5"
+            : "hover:border-primary-container/40"
         }`}
       >
         <Upload
-          className={`mb-2 h-8 w-8 ${isDragging ? "text-primary" : "text-text-secondary"}`}
+          className={`mb-2 h-8 w-8 ${isDragging ? "text-primary-container" : "text-on-surface-variant"}`}
           aria-hidden="true"
         />
-        <p className="text-center text-sm font-medium text-text-primary">
+        <p className="text-center font-[family-name:var(--font-mono)] text-sm uppercase text-on-surface-variant">
           Arrastrá tus archivos o hacé clic para adjuntar
         </p>
-        <p className="mt-1 text-center text-xs text-text-secondary">
+        <p className="mt-1 text-center font-[family-name:var(--font-mono)] text-xs text-on-surface-variant/60">
           Logotipo, diseño, foto, boceto o referencia (PDF, PNG, JPG, AI, PSD)
         </p>
       </div>
@@ -129,7 +129,7 @@ export default function FileUploader({
       />
 
       {error && (
-        <p className="text-sm text-red-400" role="alert">
+        <p className="font-[family-name:var(--font-mono)] text-xs text-error" role="alert">
           {error}
         </p>
       )}
@@ -139,19 +139,19 @@ export default function FileUploader({
           {files.map((file, i) => (
             <li
               key={`${file.name}-${i}`}
-              className="flex items-center justify-between rounded-lg bg-surface-alt px-3 py-2 text-sm"
+              className="flex items-center justify-between bg-surface-container-high px-2 py-1 font-[family-name:var(--font-mono)] text-xs text-on-surface-variant"
             >
-              <span className="flex items-center gap-2 text-text-secondary truncate">
+              <span className="flex items-center gap-2 truncate">
                 <FileText className="h-4 w-4 shrink-0" aria-hidden="true" />
                 <span className="truncate">{file.name}</span>
-                <span className="shrink-0 text-xs text-text-secondary/60">
+                <span className="shrink-0 text-on-surface-variant/60">
                   ({(file.size / 1024 / 1024).toFixed(1)} MB)
                 </span>
               </span>
               <button
                 type="button"
                 onClick={() => removeFile(i)}
-                className="ml-2 shrink-0 rounded p-0.5 text-text-secondary hover:text-red-400 transition-colors"
+                className="ml-2 shrink-0 p-0.5 text-error transition-colors hover:text-error-container"
                 aria-label={`Eliminar ${file.name}`}
               >
                 <X className="h-4 w-4" />
