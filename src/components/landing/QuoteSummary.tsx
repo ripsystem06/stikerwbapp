@@ -45,6 +45,13 @@ function specsSummary(
   return parts.join(" · ") || "Sin especificaciones";
 }
 
+// ── Style constants ────────────────────────────────────────
+const BTN_CONTINUE =
+  "w-full rounded-none bg-primary-container px-4 py-3 font-[family-name:var(--font-mono)] text-sm font-bold uppercase text-black border-r-4 border-b-4 border-on-primary-container transition-all hover:-translate-y-0.5 active:translate-y-0";
+
+const BTN_SEND =
+  "w-full rounded-none bg-surface-container-high px-4 py-3 font-[family-name:var(--font-mono)] text-sm font-bold uppercase text-on-surface border border-surface-container-highest transition-colors hover:bg-surface-container-highest";
+
 // ── Shared content ────────────────────────────────────────
 interface QuoteSummaryContentProps {
   onContinue: () => void;
@@ -59,10 +66,10 @@ function QuoteSummaryContent({ onContinue, onSend }: QuoteSummaryContentProps) {
     return (
       <div className="flex flex-1 flex-col items-center justify-center px-4 py-8 text-center">
         <ShoppingCart
-          className="mb-3 h-10 w-10 text-text-secondary/40"
+          className="mb-3 h-10 w-10 text-on-surface-variant/40"
           aria-hidden="true"
         />
-        <p className="text-sm text-text-secondary">
+        <p className="text-sm text-on-surface-variant">
           Seleccioná productos para comenzar tu cotización
         </p>
       </div>
@@ -86,26 +93,26 @@ function QuoteSummaryContent({ onContinue, onSend }: QuoteSummaryContentProps) {
                 animate="animate"
                 exit="exit"
                 layout
-                className="border-b border-surface-alt py-3 last:border-b-0"
+                className="mb-2 border border-surface-variant bg-surface-container-lowest p-3 last:mb-0"
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0 flex-1">
-                    <p className="text-sm font-semibold text-text-primary truncate">
+                    <p className="font-[family-name:var(--font-display)] text-sm uppercase italic text-on-surface truncate">
                       {product.name}
                     </p>
-                    <p className="mt-0.5 text-xs text-text-secondary">
+                    <p className="mt-0.5 font-[family-name:var(--font-mono)] text-xs text-on-surface-variant">
                       {specsSummary(item)}
                     </p>
                   </div>
-                  <span className="shrink-0 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-bold text-primary">
+                  <span className="shrink-0 rounded-full bg-primary-container px-2 py-0.5 font-[family-name:var(--font-mono)] text-xs font-bold text-black">
                     ×{item.quantity}
                   </span>
                 </div>
 
                 {item.designStatus && (
-                  <p className="mt-1 text-xs text-text-secondary/80">
+                  <p className="mt-1 font-[family-name:var(--font-mono)] text-xs text-on-surface-variant/80">
                     Diseño:{" "}
-                    <span className="text-text-secondary">
+                    <span className="text-on-surface-variant">
                       {
                         {
                           "print-ready": "Listo para imprimir",
@@ -124,16 +131,16 @@ function QuoteSummaryContent({ onContinue, onSend }: QuoteSummaryContentProps) {
       </div>
 
       {/* Footer */}
-      <div className="shrink-0 border-t border-surface-alt px-4 py-3 space-y-2">
+      <div className="shrink-0 border-t border-surface-container-high px-4 py-3 space-y-2">
         <div className="flex items-center justify-between text-sm">
-          <span className="text-text-secondary">Total de productos</span>
-          <span className="font-bold text-text-primary">{selectedCount}</span>
+          <span className="text-on-surface-variant">Total de productos</span>
+          <span className="font-bold text-on-surface">{selectedCount}</span>
         </div>
 
         <button
           type="button"
           onClick={onContinue}
-          className="w-full rounded-lg border border-primary/40 px-4 py-2 text-sm font-bold uppercase tracking-wide text-primary transition-colors hover:border-primary hover:bg-primary/10"
+          className={BTN_CONTINUE}
         >
           CONTINUAR COTIZACIÓN
         </button>
@@ -141,7 +148,7 @@ function QuoteSummaryContent({ onContinue, onSend }: QuoteSummaryContentProps) {
         <button
           type="button"
           onClick={onSend}
-          className="w-full rounded-lg bg-[#25D366] px-4 py-2 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-[#20bd5a] active:scale-[0.98]"
+          className={BTN_SEND}
         >
           ENVIAR POR WHATSAPP
         </button>
@@ -171,31 +178,39 @@ function DesktopPanel({
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="fixed right-0 top-20 hidden h-[calc(100vh-5rem)] w-[360px] flex-col border-l border-surface-alt bg-surface md:flex"
+          className="fixed right-0 top-20 hidden h-[calc(100vh-5rem)] w-[350px] flex-col border-l border-surface-container-high bg-surface md:flex"
           aria-label="Resumen de cotización"
         >
-          {/* Header */}
-          <div className="shrink-0 border-b border-surface-alt px-4 py-4">
-            <div className="flex items-center gap-2">
-              <ShoppingCart
-                className="h-5 w-5 text-primary"
-                aria-hidden="true"
-              />
-              <h3 className="flex-1 text-base font-bold uppercase tracking-wide text-text-primary">
-                TU COTIZACIÓN
-              </h3>
-              <button
-                type="button"
-                onClick={onClose}
-                className="rounded-lg p-1.5 text-text-secondary transition-colors hover:bg-surface-alt hover:text-text-primary"
-                aria-label="Cerrar panel de cotización"
-              >
-                <X className="h-4 w-4" aria-hidden="true" />
-              </button>
-            </div>
-          </div>
+          {/* Tech grid background overlay */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-tech-grid opacity-10"
+          />
 
-          <QuoteSummaryContent onContinue={onContinue} onSend={onSend} />
+          <div className="relative z-10 flex h-full flex-col">
+            {/* Header */}
+            <div className="shrink-0 border-b border-surface-container-high px-4 py-4">
+              <div className="flex items-center gap-2">
+                <ShoppingCart
+                  className="h-5 w-5 text-primary-container"
+                  aria-hidden="true"
+                />
+                <h3 className="flex-1 font-[family-name:var(--font-display)] text-base font-bold uppercase italic tracking-wide text-on-surface">
+                  TU COTIZACIÓN
+                </h3>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="p-1.5 text-on-surface-variant transition-colors hover:text-primary-container"
+                  aria-label="Cerrar panel de cotización"
+                >
+                  <X className="h-4 w-4" aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+
+            <QuoteSummaryContent onContinue={onContinue} onSend={onSend} />
+          </div>
         </m.aside>
       )}
     </AnimatePresence>
@@ -255,7 +270,7 @@ function MobileDrawer({
 
       {/* Drawer */}
       <m.aside
-        className="fixed bottom-0 left-0 right-0 z-50 flex flex-col rounded-t-2xl bg-surface shadow-[0_-4px_20px_rgba(0,0,0,0.5)] md:hidden"
+        className="fixed bottom-0 left-0 right-0 z-50 flex flex-col rounded-t-2xl border-t border-surface-container-high bg-surface md:hidden"
         style={{ maxHeight: "80vh" }}
         variants={drawerVariants}
         initial="collapsed"
@@ -271,21 +286,21 @@ function MobileDrawer({
           aria-label={isOpen ? "Cerrar cotización" : "Ver cotización"}
           aria-expanded={isOpen}
         >
-          <span className="mb-1 h-1 w-10 rounded-full bg-surface-alt" />
+          <span className="mb-1 h-1 w-10 rounded-full bg-surface-container-high" />
           <div className="flex items-center gap-2">
-            <ShoppingCart className="h-4 w-4 text-primary" aria-hidden="true" />
-            <span className="text-sm font-bold uppercase tracking-wide text-text-primary">
+            <ShoppingCart className="h-4 w-4 text-primary-container" aria-hidden="true" />
+            <span className="font-[family-name:var(--font-mono)] text-sm font-bold uppercase tracking-wide text-on-surface">
               {selectedCount > 0
                 ? `${selectedCount} producto${selectedCount > 1 ? "s" : ""}`
                 : "TU COTIZACIÓN"}
             </span>
             {selectedCount > 0 && (
-              <span className="rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-bold text-white">
+              <span className="rounded-full bg-primary-container px-1.5 py-0.5 font-[family-name:var(--font-mono)] text-[10px] font-bold text-black">
                 {selectedCount}
               </span>
             )}
             <ChevronUp
-              className={`h-4 w-4 text-text-secondary transition-transform ${isOpen ? "rotate-180" : ""}`}
+              className={`h-4 w-4 text-primary-container transition-transform ${isOpen ? "rotate-180" : ""}`}
               aria-hidden="true"
             />
           </div>
@@ -335,11 +350,11 @@ export default function QuoteSummary() {
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0, opacity: 0 }}
-          className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/30 transition-transform hover:scale-110 active:scale-95"
+          className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary-container text-black transition-transform hover:scale-110 active:scale-95"
           aria-label={`Ver cotización (${selectedCount} producto${selectedCount > 1 ? "s" : ""})`}
         >
           <ShoppingCart className="h-6 w-6" aria-hidden="true" />
-          <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-orange-600 text-[10px] font-bold text-white ring-2 ring-surface">
+          <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-secondary-container font-[family-name:var(--font-mono)] text-[10px] font-bold text-on-secondary-container ring-2 ring-surface">
             {selectedCount}
           </span>
         </m.button>

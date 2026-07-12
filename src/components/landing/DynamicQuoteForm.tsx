@@ -98,6 +98,15 @@ function buildFieldUpdate(
   return { [key]: raw } as Partial<QuoteItem>;
 }
 
+// ── Input style constants ──────────────────────────────────
+const INPUT_BASE =
+  "w-full border-b-2 border-surface-container-high bg-surface-container-low py-3 px-0 text-on-surface placeholder:text-on-surface-variant/40 transition-colors focus:border-primary-container outline-none font-[family-name:var(--font-sans)]";
+const INPUT_ERROR = "border-error";
+const LABEL_CLASS =
+  "mb-1 block font-[family-name:var(--font-mono)] text-xs font-medium uppercase tracking-wider text-on-surface-variant";
+const ERROR_MSG =
+  "mt-1 font-[family-name:var(--font-mono)] text-xs text-error";
+
 // ── Sub-components ────────────────────────────────────────
 
 function FieldInput({
@@ -111,9 +120,7 @@ function FieldInput({
   onChange: (raw: string) => void;
   error?: string;
 }) {
-  const baseClasses =
-    "w-full rounded-lg border bg-surface px-4 py-3 text-sm text-white placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors";
-  const borderClass = error ? "border-red-500" : "border-surface-alt";
+  const borderClass = error ? INPUT_ERROR : "";
 
   if (field.type === "select") {
     const options = SELECT_OPTIONS[field.name] ?? [];
@@ -122,7 +129,7 @@ function FieldInput({
         <select
           value={String(value)}
           onChange={(e) => onChange(e.target.value)}
-          className={`${baseClasses} ${borderClass} appearance-none`}
+          className={`${INPUT_BASE} ${borderClass}`}
           aria-label={field.label}
           aria-invalid={!!error}
         >
@@ -134,7 +141,7 @@ function FieldInput({
           ))}
         </select>
         {error && (
-          <p className="mt-1 text-xs text-red-400" role="alert">
+          <p className={ERROR_MSG} role="alert">
             {error}
           </p>
         )}
@@ -149,13 +156,13 @@ function FieldInput({
           value={String(value)}
           onChange={(e) => onChange(e.target.value)}
           rows={3}
-          className={`${baseClasses} ${borderClass} resize-y`}
+          className={`${INPUT_BASE} ${borderClass} resize-y min-h-[80px]`}
           placeholder={field.label}
           aria-label={field.label}
           aria-invalid={!!error}
         />
         {error && (
-          <p className="mt-1 text-xs text-red-400" role="alert">
+          <p className={ERROR_MSG} role="alert">
             {error}
           </p>
         )}
@@ -170,14 +177,14 @@ function FieldInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={field.label}
-        className={`${baseClasses} ${borderClass}`}
+        className={`${INPUT_BASE} ${borderClass}`}
         aria-label={field.label}
         aria-invalid={!!error}
         min={field.type === "number" ? 1 : undefined}
         step={field.type === "number" ? 1 : undefined}
       />
       {error && (
-        <p className="mt-1 text-xs text-red-400" role="alert">
+        <p className={ERROR_MSG} role="alert">
           {error}
         </p>
       )}
@@ -228,13 +235,13 @@ export default function DynamicQuoteForm() {
   // ── Empty state ─────────────────────────────────────────
   if (selectedCount === 0) {
     return (
-      <section id="cotizar" className="mt-16 scroll-mt-24">
+      <section id="cotizar" className="scroll-mt-24 py-24">
         <div className="text-center">
           <Package
-            className="mx-auto h-12 w-12 text-text-secondary/30"
+            className="mx-auto h-12 w-12 text-on-surface-variant/30"
             aria-hidden="true"
           />
-          <p className="mt-4 text-base text-text-secondary">
+          <p className="mt-4 text-base text-on-surface-variant">
             Seleccioná productos para comenzar tu cotización
           </p>
         </div>
@@ -242,273 +249,230 @@ export default function DynamicQuoteForm() {
     );
   }
 
+  // ── Contact field input helper ──────────────────────────
+  const ContactInput = ({
+    id,
+    field,
+    type = "text",
+    placeholder,
+    required,
+  }: {
+    id: keyof ContactFormData;
+    field: ReturnType<typeof register>;
+    type?: string;
+    placeholder: string;
+    required?: boolean;
+  }) => (
+    <div>
+      <label htmlFor={`cf-${id}`} className={LABEL_CLASS}>
+        {placeholder}
+        {required ? " *" : ""}
+      </label>
+      <input
+        id={`cf-${id}`}
+        type={type}
+        {...field}
+        placeholder={placeholder}
+        className={`${INPUT_BASE} ${errors[id] ? INPUT_ERROR : ""}`}
+        aria-invalid={!!errors[id]}
+      />
+      {errors[id] && (
+        <p className={ERROR_MSG} role="alert">
+          {errors[id]?.message as string}
+        </p>
+      )}
+    </div>
+  );
+
   // ── Form ────────────────────────────────────────────────
   return (
-    <section id="cotizar" className="mt-16 scroll-mt-24">
-      <div className="mx-auto max-w-2xl">
-        <h2 className="mb-8 text-center text-2xl font-extrabold uppercase italic tracking-wide text-text-primary sm:text-3xl">
-          COMPLETÁ TU COTIZACIÓN
-        </h2>
+    <section id="cotizar" className="scroll-mt-24">
+      {/* Tech grid background */}
+      <div className="relative bg-background py-24">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-tech-grid"
+        />
 
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          onKeyDown={handleFormKeyDown}
-          noValidate
-          className="space-y-10"
-        >
-          {/* ── Contact fields ────────────────────────────── */}
-          <fieldset className="space-y-4">
-            <legend className="mb-4 text-lg font-bold uppercase tracking-wide text-text-primary">
-              Datos de contacto
-            </legend>
+        <div className="relative z-10 mx-auto max-w-3xl px-6">
+          <h2 className="mb-2 text-center font-[family-name:var(--font-display)] text-3xl font-extrabold uppercase italic text-on-surface sm:text-4xl">
+            COMPLETÁ TU COTIZACIÓN
+          </h2>
+          <p className="mb-10 text-center text-base text-on-surface-variant">
+            Completá los datos de cada producto y tus datos de contacto para
+            enviar la cotización por WhatsApp.
+          </p>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div>
-                <label
-                  htmlFor="cf-name"
-                  className="mb-1 block text-sm font-medium text-text-secondary"
-                >
-                  Nombre *
-                </label>
-                <input
-                  id="cf-name"
-                  type="text"
-                  {...register("name")}
-                  placeholder="Tu nombre completo"
-                  className={`w-full rounded-lg border bg-surface px-4 py-3 text-sm text-white placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors ${
-                    errors.name ? "border-red-500" : "border-surface-alt"
-                  }`}
-                  aria-invalid={!!errors.name}
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            onKeyDown={handleFormKeyDown}
+            noValidate
+            className="space-y-10"
+          >
+            {/* ── Contact fields ────────────────────────────── */}
+            <fieldset className="rounded-none border border-surface-container-high bg-surface-container p-6">
+              <legend className="mb-4 font-[family-name:var(--font-display)] text-base uppercase italic text-on-surface">
+                Datos de contacto
+              </legend>
+
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <ContactInput
+                  id="name"
+                  field={register("name")}
+                  placeholder="Nombre"
+                  required
                 />
-                {errors.name && (
-                  <p className="mt-1 text-xs text-red-400" role="alert">
-                    {errors.name.message}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <label
-                  htmlFor="cf-company"
-                  className="mb-1 block text-sm font-medium text-text-secondary"
-                >
-                  Empresa
-                </label>
-                <input
-                  id="cf-company"
-                  type="text"
-                  {...register("company")}
-                  placeholder="Nombre de tu empresa (opcional)"
-                  className="w-full rounded-lg border border-surface-alt bg-surface px-4 py-3 text-sm text-white placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors"
+                <ContactInput
+                  id="company"
+                  field={register("company")}
+                  placeholder="Empresa"
                 />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="cf-city"
-                  className="mb-1 block text-sm font-medium text-text-secondary"
-                >
-                  Ciudad *
-                </label>
-                <input
-                  id="cf-city"
-                  type="text"
-                  {...register("city")}
+                <ContactInput
+                  id="city"
+                  field={register("city")}
                   placeholder="Ciudad"
-                  className={`w-full rounded-lg border bg-surface px-4 py-3 text-sm text-white placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors ${
-                    errors.city ? "border-red-500" : "border-surface-alt"
-                  }`}
-                  aria-invalid={!!errors.city}
+                  required
                 />
-                {errors.city && (
-                  <p className="mt-1 text-xs text-red-400" role="alert">
-                    {errors.city.message}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <label
-                  htmlFor="cf-whatsapp"
-                  className="mb-1 block text-sm font-medium text-text-secondary"
-                >
-                  WhatsApp *
-                </label>
-                <input
-                  id="cf-whatsapp"
+                <ContactInput
+                  id="whatsapp"
+                  field={register("whatsapp")}
                   type="tel"
-                  {...register("whatsapp")}
-                  placeholder="+54 9 11 2345-6789"
-                  className={`w-full rounded-lg border bg-surface px-4 py-3 text-sm text-white placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors ${
-                    errors.whatsapp ? "border-red-500" : "border-surface-alt"
-                  }`}
-                  aria-invalid={!!errors.whatsapp}
+                  placeholder="WhatsApp"
+                  required
                 />
-                {errors.whatsapp && (
-                  <p className="mt-1 text-xs text-red-400" role="alert">
-                    {errors.whatsapp.message}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <label
-                  htmlFor="cf-email"
-                  className="mb-1 block text-sm font-medium text-text-secondary"
-                >
-                  Correo electrónico
-                </label>
-                <input
-                  id="cf-email"
+                <ContactInput
+                  id="email"
+                  field={register("email")}
                   type="email"
-                  {...register("email")}
-                  placeholder="tu@correo.com"
-                  className={`w-full rounded-lg border bg-surface px-4 py-3 text-sm text-white placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors ${
-                    errors.email ? "border-red-500" : "border-surface-alt"
-                  }`}
-                  aria-invalid={!!errors.email}
+                  placeholder="Correo electrónico"
                 />
-                {errors.email && (
-                  <p className="mt-1 text-xs text-red-400" role="alert">
-                    {errors.email.message}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <label
-                  htmlFor="cf-requiredDate"
-                  className="mb-1 block text-sm font-medium text-text-secondary"
-                >
-                  Fecha requerida
-                </label>
-                <input
-                  id="cf-requiredDate"
+                <ContactInput
+                  id="requiredDate"
+                  field={register("requiredDate")}
                   type="date"
-                  {...register("requiredDate")}
-                  className="w-full rounded-lg border border-surface-alt bg-surface px-4 py-3 text-sm text-white placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors"
+                  placeholder="Fecha requerida"
                 />
               </div>
-            </div>
-          </fieldset>
+            </fieldset>
 
-          {/* ── Product-specific fields ───────────────────── */}
-          {selectedProducts.map((product) => {
-            const item = quoteItems.get(product.id);
-            if (!item) return null;
+            {/* ── Product-specific fields ───────────────────── */}
+            {selectedProducts.map((product) => {
+              const item = quoteItems.get(product.id);
+              if (!item) return null;
 
-            const visibleFields = getVisibleFields([product.category]).filter(
-              (f) => !SKIP_FIELDS.has(f.name),
-            );
+              const visibleFields = getVisibleFields([product.category]).filter(
+                (f) => !SKIP_FIELDS.has(f.name),
+              );
 
-            return (
-              <fieldset
-                key={product.id}
-                className="rounded-xl border border-surface-alt bg-surface p-6"
-              >
-                <legend className="mb-4 flex items-center gap-2 text-base font-bold text-text-primary">
-                  <Package className="h-5 w-5 text-primary" aria-hidden="true" />
-                  {product.name}
-                </legend>
+              return (
+                <fieldset
+                  key={product.id}
+                  className="rounded-none border border-surface-container-high bg-surface-container p-6"
+                >
+                  <legend className="mb-4 flex items-center gap-2 font-[family-name:var(--font-display)] text-base uppercase italic text-on-surface">
+                    <Package
+                      className="h-5 w-5 text-primary-container"
+                      aria-hidden="true"
+                    />
+                    {product.name}
+                  </legend>
 
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  {visibleFields.map((field) => (
-                    <div
-                      key={field.name}
-                      className={
-                        field.type === "textarea" ? "sm:col-span-2" : ""
-                      }
-                    >
-                      <label className="mb-1 block text-sm font-medium text-text-secondary">
-                        {field.label}
-                        {field.required ? " *" : ""}
-                      </label>
-                      <FieldInput
-                        field={field}
-                        value={getItemField(item, field.name)}
-                        onChange={(raw) => {
-                          const updates = buildFieldUpdate(field, raw);
-                          if (Object.keys(updates).length > 0) {
-                            dispatch({
-                              type: "UPDATE_ITEM",
-                              productId: product.id,
-                              updates,
-                            });
-                          }
-                        }}
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                {/* Design status radios */}
-                <div className="mt-5">
-                  <p className="mb-2 text-sm font-medium text-text-secondary">
-                    Estado del Diseño
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    {DESIGN_STATUS_ORDER.map((status) => (
-                      <label
-                        key={status}
-                        className={`flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-sm transition-colors ${
-                          item.designStatus === status
-                            ? "border-primary bg-primary/10 text-primary"
-                            : "border-surface-alt text-text-secondary hover:border-text-secondary/50"
-                        }`}
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    {visibleFields.map((field) => (
+                      <div
+                        key={field.name}
+                        className={
+                          field.type === "textarea" ? "sm:col-span-2" : ""
+                        }
                       >
-                        <input
-                          type="radio"
-                          name={`designStatus-${product.id}`}
-                          value={status}
-                          checked={item.designStatus === status}
-                          onChange={() =>
-                            dispatch({
-                              type: "UPDATE_ITEM",
-                              productId: product.id,
-                              updates: { designStatus: status },
-                            })
-                          }
-                          className="sr-only"
+                        <label className={LABEL_CLASS}>
+                          {field.label}
+                          {field.required ? " *" : ""}
+                        </label>
+                        <FieldInput
+                          field={field}
+                          value={getItemField(item, field.name)}
+                          onChange={(raw) => {
+                            const updates = buildFieldUpdate(field, raw);
+                            if (Object.keys(updates).length > 0) {
+                              dispatch({
+                                type: "UPDATE_ITEM",
+                                productId: product.id,
+                                updates,
+                              });
+                            }
+                          }}
                         />
-                        {DESIGN_STATUS_LABELS[status]}
-                      </label>
+                      </div>
                     ))}
                   </div>
-                </div>
-              </fieldset>
-            );
-          })}
 
-          {/* ── File upload ───────────────────────────────── */}
-          <FileUploader
-            label="Archivos adjuntos"
-            onFilesSelected={() => {
-              // Files are collected client-side only; referenced in WhatsApp message
-            }}
-          />
+                  {/* Design status radios */}
+                  <div className="mt-5">
+                    <p className="mb-2 font-[family-name:var(--font-mono)] text-xs font-medium uppercase tracking-wider text-on-surface-variant">
+                      Estado del Diseño
+                    </p>
+                    <div className="flex flex-wrap gap-3">
+                      {DESIGN_STATUS_ORDER.map((status) => (
+                        <label
+                          key={status}
+                          className={`flex cursor-pointer items-center gap-2 rounded-none border px-3 py-2 font-[family-name:var(--font-mono)] text-[10px] uppercase transition-colors ${
+                            item.designStatus === status
+                              ? "border-primary-container bg-primary-container/10 text-primary-container"
+                              : "border-surface-container-high text-on-surface-variant hover:border-surface-container-highest"
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            name={`designStatus-${product.id}`}
+                            value={status}
+                            checked={item.designStatus === status}
+                            onChange={() =>
+                              dispatch({
+                                type: "UPDATE_ITEM",
+                                productId: product.id,
+                                updates: { designStatus: status },
+                              })
+                            }
+                            className="sr-only"
+                          />
+                          {DESIGN_STATUS_LABELS[status]}
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                </fieldset>
+              );
+            })}
 
-          {/* ── Comments ──────────────────────────────────── */}
-          <div>
-            <label
-              htmlFor="cf-comments"
-              className="mb-1 block text-sm font-medium text-text-secondary"
-            >
-              Comentarios adicionales
-            </label>
-            <textarea
-              id="cf-comments"
-              {...register("comments")}
-              rows={4}
-              placeholder="Contanos más sobre tu proyecto, ideas, referencias…"
-              className="w-full rounded-lg border border-surface-alt bg-surface px-4 py-3 text-sm text-white placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors resize-y"
+            {/* ── File upload ───────────────────────────────── */}
+            <FileUploader
+              label="Archivos adjuntos"
+              onFilesSelected={() => {
+                // Files are collected client-side only; referenced in WhatsApp message
+              }}
             />
-          </div>
 
-          {/* ── Submit ────────────────────────────────────── */}
-          <div className="flex flex-col items-center gap-2 pt-4">
-            <WhatsAppQuoteGenerator className="w-full sm:w-auto" />
-          </div>
-        </form>
+            {/* ── Comments ──────────────────────────────────── */}
+            <div>
+              <label htmlFor="cf-comments" className={LABEL_CLASS}>
+                Comentarios adicionales
+              </label>
+              <textarea
+                id="cf-comments"
+                {...register("comments")}
+                rows={4}
+                placeholder="Contanos más sobre tu proyecto, ideas, referencias…"
+                className={`${INPUT_BASE} min-h-[100px] resize-y`}
+              />
+            </div>
+
+            {/* ── Submit ────────────────────────────────────── */}
+            <div className="mt-8 flex flex-col items-center gap-2 border-t border-surface-container-high pt-6">
+              <WhatsAppQuoteGenerator className="w-full sm:w-auto" />
+            </div>
+          </form>
+        </div>
       </div>
     </section>
   );
