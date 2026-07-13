@@ -105,7 +105,7 @@ export default function Hero() {
               variants={fadeUp}
             >
               <a
-                href="#productos"
+                href="/cotizar"
                 className="group/cot inline-flex slanted"
               >
                 <span className="unslanted inline-flex items-center justify-center bg-primary-container px-8 py-3.5 text-sm font-bold uppercase text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] transition-colors hover:brightness-110 font-[family-name:var(--font-jetbrains-mono)] tracking-wide">
