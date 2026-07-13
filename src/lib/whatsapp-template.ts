@@ -1,6 +1,6 @@
 import { type QuoteFormData, type QuoteItem } from "./schemas";
 
-export const BUSINESS_PHONE = "521234567890";
+export const BUSINESS_PHONE = "526463077208";
 
 function formatItem(item: QuoteItem): string {
   const lines: string[] = [];

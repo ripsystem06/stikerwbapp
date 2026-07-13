@@ -18,9 +18,10 @@ export default function ProductSelector() {
   const totalCount = products.length;
 
   return (
-    <div>
+    <div className="pt-6">
+      {/* Product count */}
       <p
-        className="mt-6 text-sm text-text-secondary"
+        className="text-xs font-bold uppercase tracking-wider text-on-surface-variant font-[family-name:var(--font-jetbrains-mono)]"
         aria-live="polite"
         aria-atomic="true"
       >
@@ -30,11 +31,11 @@ export default function ProductSelector() {
       </p>
 
       {filteredProducts.length === 0 ? (
-        <p className="mt-12 text-center text-base text-text-secondary">
+        <p className="mt-12 text-center text-base leading-relaxed text-on-surface-variant">
           No hay productos en esta categoría
         </p>
       ) : (
-        <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
