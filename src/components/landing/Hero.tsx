@@ -33,41 +33,34 @@ export default function Hero() {
   return (
     <LazyMotion features={domAnimation}>
       <section className="relative flex min-h-screen items-center overflow-hidden">
-        {/* Base background */}
-        <div className="absolute inset-0 bg-background" />
+        {/* Hero background image — full coverage */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+        >
+          <div
+            className="h-full w-full bg-cover bg-center"
+            style={{ backgroundImage: "url('/herostker.png')" }}
+          />
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-background/70" />
+        </div>
 
         {/* Tech grid overlay */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-tech-grid"
-        />
-
-        {/* Gradient overlay from left */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent"
+          className="absolute inset-0 bg-tech-grid opacity-30"
         />
 
         {/* Diagonal speed line accents */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 opacity-[0.06]"
+          className="absolute inset-0 opacity-[0.04]"
           style={{
             backgroundImage:
               "repeating-linear-gradient(25deg, transparent, transparent 40px, #fe5825 40px, #fe5825 41px), repeating-linear-gradient(-55deg, transparent, transparent 100px, #fe5825 100px, #fe5825 101px)",
           }}
         />
-
-        {/* Hero image — right side */}
-        <div
-          aria-hidden="true"
-          className="absolute right-0 top-0 h-full w-full md:w-[55%]"
-        >
-          <div
-            className="h-full w-full bg-cover bg-right-top opacity-40"
-            style={{ backgroundImage: "url('/herostker.png')" }}
-          />
-        </div>
 
         {/* Diagonal cut at bottom */}
         <div
