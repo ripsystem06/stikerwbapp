@@ -17,6 +17,8 @@ const ContactSchema = z.object({
   city: z.string().min(1, "Este campo es obligatorio"),
   whatsapp: z.string().min(1, "Este campo es obligatorio"),
   email: z.string().email("Correo inválido").optional().or(z.literal("")),
+  quantity: z.string().optional(),
+  neededBy: z.string().optional(),
   comments: z.string().optional(),
 });
 
@@ -41,9 +43,12 @@ function buildMessage(data: ContactForm, selectedNames: string[]): string {
       ? `\n\n📦 *Productos solicitados:*\n${selectedNames.map((n) => `• ${n}`).join("\n")}`
       : "";
 
+  const quantity = data.quantity ? `\n\n📐 *Cantidad estimada:* ${data.quantity} piezas` : "";
+  const neededBy = data.neededBy ? `\n\n📅 *Fecha requerida:* ${data.neededBy}` : "";
+
   const notes = data.comments ? `\n\n📝 *Comentarios:*\n${data.comments}` : "";
 
-  return `${header}\n\n${contact}${productsList}${notes}\n\n_Solicitud enviada desde stikers.app_`;
+  return `${header}\n\n${contact}${productsList}${quantity}${neededBy}${notes}\n\n_Solicitud enviada desde stikers.app_`;
 }
 
 function CotizarForm() {
@@ -191,6 +196,29 @@ function CotizarForm() {
           {errors.email && (
             <p className="mt-1 font-[family-name:var(--font-mono)] text-xs text-error">{errors.email.message}</p>
           )}
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <div>
+            <label className="mb-1 block font-[family-name:var(--font-mono)] text-xs font-medium uppercase tracking-wider text-on-surface-variant">
+              Cantidad de piezas
+            </label>
+            <input
+              {...register("quantity")}
+              placeholder="Ej: 100, 500, 1,000"
+              className="w-full border-b-2 border-surface-container-high bg-transparent py-3 text-on-surface outline-none transition-colors focus:border-primary-container placeholder:text-on-surface-variant/40"
+            />
+          </div>
+          <div>
+            <label className="mb-1 block font-[family-name:var(--font-mono)] text-xs font-medium uppercase tracking-wider text-on-surface-variant">
+              Fecha requerida
+            </label>
+            <input
+              {...register("neededBy")}
+              placeholder="Ej: 15 de agosto"
+              className="w-full border-b-2 border-surface-container-high bg-transparent py-3 text-on-surface outline-none transition-colors focus:border-primary-container placeholder:text-on-surface-variant/40"
+            />
+          </div>
         </div>
 
         <div>
