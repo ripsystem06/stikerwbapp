@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Stikers
 
-## Getting Started
+## Stickers que hacen destacar tu marca
 
-First, run the development server:
+Stikers es una plataforma de cotización de stickers personalizados. Diseñamos y producimos stickers para empresas, marcas, productos, equipos deportivos, vehículos, motocross, off-road, eventos y cualquier proyecto que necesite destacar.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Desde etiquetas para productos gourmet hasta kits gráficos completos para motos de competencia, trabajamos con materiales profesionales y atención personalizada en cada proyecto.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Lo que ofrecemos
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Stickers personalizados** — Troquelados, transparentes, holográficos, reflectivos, metalizados y resistentes al agua.
+- **Empresas y marcas** — Etiquetas para productos, packaging, códigos QR, stickers promocionales y branding corporativo.
+- **Motorsport y vehículos** — Kits gráficos para motocross, UTV, off-road, cascos, números de competencia y patrocinadores.
+- **Proyectos especiales** — Señalización industrial, decoración, eventos, material deportivo y soluciones a medida.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Cómo funciona
 
-## Learn More
+1. **Seleccioná** — Elegí uno o varios productos según lo que necesitás.
+2. **Personalizá** — Indicá cantidades, dimensiones, materiales y compartí tu diseño o idea.
+3. **Cotizá** — Envía tu solicitud por WhatsApp y recibí atención personalizada.
 
-To learn more about Next.js, take a look at the following resources:
+Sin carrito de compras, sin pagos en línea. Solo elegís, completás y te respondemos.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Para quién trabajamos
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Negocios y emprendedores que necesitan etiquetas, packaging o material promocional.
+- Marcas que buscan identidad visual coherente en todos sus productos.
+- Equipos deportivos y pilotos que compiten con gráficos profesionales.
+- Organizadores de eventos que necesitan producción en volumen.
+- Cualquier persona con una idea que merece un sticker a su medida.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Stikers** — Diseño, producción y atención personalizada. Sin mínimos, sin compromiso.
