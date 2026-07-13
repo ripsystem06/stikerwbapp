@@ -20,16 +20,15 @@ export default function Home() {
       <main id="main-content">
         <Hero />
 
-        {/* Divider */}
         <div className="h-px bg-surface-container-high" aria-hidden="true" />
 
-        <ProcessSteps />
+        <section id="como-funciona">
+          <ProcessSteps />
+        </section>
 
-        {/* Divider */}
         <div className="h-px bg-surface-container-high" aria-hidden="true" />
 
-        {/* Configurator section with tech grid wrapper */}
-        <div className="relative bg-tech-grid">
+        <section id="productos" className="relative bg-tech-grid">
           <QuoteConfiguratorShell>
             <CategoryFilter />
             <ProductSelector />
@@ -38,32 +37,35 @@ export default function Home() {
             </div>
             <QuoteSummary />
           </QuoteConfiguratorShell>
-        </div>
+        </section>
 
-        {/* Divider */}
         <div className="h-px bg-surface-container-high" aria-hidden="true" />
 
-        <ProjectGallery />
+        <section id="proyectos">
+          <ProjectGallery />
+        </section>
 
-        {/* Divider */}
         <div className="h-px bg-surface-container-high" aria-hidden="true" />
 
-        <MotorsportSection />
+        <section id="motorsport">
+          <MotorsportSection />
+        </section>
 
-        {/* Divider */}
         <div className="h-px bg-surface-container-high" aria-hidden="true" />
 
-        <BusinessSection />
+        <section id="empresas">
+          <BusinessSection />
+        </section>
 
-        {/* Divider */}
         <div className="h-px bg-surface-container-high" aria-hidden="true" />
 
         <Benefits />
 
-        {/* Divider */}
         <div className="h-px bg-surface-container-high" aria-hidden="true" />
 
-        <FAQ />
+        <section id="contacto">
+          <FAQ />
+        </section>
       </main>
       <Footer />
     </>

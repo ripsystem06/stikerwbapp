@@ -106,7 +106,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     description:
       "Etiquetas frontales y contraetiquetas con microtexto y detalles UV. Serie limitada de 3 cepas con diseño minimalista.",
     tags: ["Papel Texturizado", "Barniz UV Selectivo", "Resistente a Frío"],
-    gradient: "from-red-950 via-burgundy-950 to-zinc-900",
+    gradient: "from-red-950 via-rose-950 to-zinc-900",
     icon: ShoppingBag,
     isFeatured: false,
   },

@@ -111,7 +111,9 @@ export default function MotorsportSection() {
         {/* CTA */}
         <div className="mt-14 text-center">
           <a
-            href="#cotizar"
+            href="https://wa.me/526463077208?text=Hola%2C%20quiero%20cotizar%20un%20proyecto%20motorsport"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-none bg-primary-container px-8 py-4 font-[family-name:var(--font-mono)] text-base font-bold uppercase text-black border-r-4 border-b-4 border-on-primary-container transition-all hover:-translate-y-0.5 active:translate-y-0"
           >
             <Flag className="h-5 w-5" aria-hidden="true" />

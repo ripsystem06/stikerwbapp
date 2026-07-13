@@ -98,7 +98,9 @@ export default function BusinessSection() {
         {/* CTA */}
         <div className="mt-14 text-center">
           <a
-            href="#cotizar"
+            href="https://wa.me/526463077208?text=Hola%2C%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20empresarial"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-none bg-secondary-container px-8 py-4 font-[family-name:var(--font-mono)] text-base font-bold uppercase text-on-secondary-container border-r-4 border-b-4 border-on-secondary-container transition-all hover:-translate-y-0.5 active:translate-y-0"
           >
             <Building2 className="h-5 w-5" aria-hidden="true" />

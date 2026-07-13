@@ -58,11 +58,16 @@ export default function Hero() {
           }}
         />
 
-        {/* Dark abstract geometric area on the right */}
+        {/* Hero image — right side */}
         <div
           aria-hidden="true"
-          className="absolute right-0 top-0 h-full w-[45%] opacity-20 bg-speed-lines"
-        />
+          className="absolute right-0 top-0 h-full w-full md:w-[55%]"
+        >
+          <div
+            className="h-full w-full bg-cover bg-right-top opacity-40"
+            style={{ backgroundImage: "url('/herostker.png')" }}
+          />
+        </div>
 
         {/* Diagonal cut at bottom */}
         <div
