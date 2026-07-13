@@ -1,6 +1,10 @@
 import Header from "@/components/landing/Header";
 import Hero from "@/components/landing/Hero";
 import ProcessSteps from "@/components/landing/ProcessSteps";
+import QuoteConfiguratorShell from "@/components/landing/QuoteConfiguratorShell";
+import CategoryFilter from "@/components/landing/CategoryFilter";
+import ProductSelector from "@/components/landing/ProductSelector";
+import QuoteSummary from "@/components/landing/QuoteSummary";
 import ProjectGallery from "@/components/landing/ProjectGallery";
 import MotorsportSection from "@/components/landing/MotorsportSection";
 import BusinessSection from "@/components/landing/BusinessSection";
@@ -17,6 +21,14 @@ export default function Home() {
         <div className="h-px bg-surface-container-high" aria-hidden="true" />
         <section id="como-funciona">
           <ProcessSteps />
+        </section>
+        <div className="h-px bg-surface-container-high" aria-hidden="true" />
+        <section id="productos" className="relative bg-tech-grid">
+          <QuoteConfiguratorShell>
+            <CategoryFilter />
+            <ProductSelector />
+            <QuoteSummary />
+          </QuoteConfiguratorShell>
         </section>
         <div className="h-px bg-surface-container-high" aria-hidden="true" />
         <section id="proyectos">

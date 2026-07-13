@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { ShoppingCart, ChevronUp, X } from "lucide-react";
 import { useQuoteContext } from "@/hooks/useQuoteConfigurator";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
@@ -187,22 +188,30 @@ function MobileDrawer({
 
 // ── Main component ────────────────────────────────────────
 export default function QuoteSummary() {
-  const { selectedCount } = useQuoteContext();
+  const { state, selectedCount } = useQuoteContext();
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   const handleContinue = useCallback(() => {
-    const formEl = document.getElementById("cotizar");
-    formEl?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, []);
-
-  const handleSend = useCallback(() => {
-    const formEl = document.getElementById("cotizar");
-    formEl?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, []);
+    const ids = Array.from(state.selectedProductIds).join(",");
+    if (ids) {
+      router.push(`/cotizar?items=${encodeURIComponent(ids)}`);
+    }
+  }, [state.selectedProductIds, router]);
 
   const handleClose = useCallback(() => setIsOpen(false), []);
   const handleToggle = useCallback(() => setIsOpen((prev) => !prev), []);
+
+  const handleSend = useCallback(() => {
+    // Abre WhatsApp directamente con lo que haya seleccionado
+    const phone = "526463077208";
+    const productNames = Array.from(state.selectedProductIds)
+      .map(() => "• Producto seleccionado")
+      .join("\n");
+    const msg = `Hola, quiero cotizar los siguientes stickers:%0A%0A${productNames}%0A%0A¿Me pueden ayudar con una cotización?`;
+    window.open(`https://wa.me/${phone}?text=${msg}`, "_blank");
+  }, [state.selectedProductIds]);
 
   return (
     <>
