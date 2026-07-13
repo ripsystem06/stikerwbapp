@@ -205,6 +205,11 @@ function CotizarForm() {
           />
         </div>
 
+        {/* Info note */}
+        <p className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-wider text-on-surface-variant/60 text-center">
+          Una vez que recibamos tu solicitud, un vendedor se comunicará contigo por WhatsApp para solicitar los detalles de diseño, archivos, medidas exactas y cualquier otra información necesaria para tu pedido.
+        </p>
+
         <button
           type="submit"
           className="flex w-full items-center justify-center gap-3 bg-[#25D366] px-8 py-4 font-[family-name:var(--font-mono)] text-base font-bold uppercase tracking-wider text-white transition-all hover:bg-[#20bd5a] active:scale-[0.98]"
